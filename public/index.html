@@ -4,28 +4,39 @@
     <meta charset="utf-8">
     <title>Draw Together</title>
     <script src="jquery-3.1.1.js"></script>
+    <link rel="stylesheet" href="style.css">
 
 
 
   </head>
   <body>
-    <canvas id="canvas" width="400" height="400"></canvas>
-    <button class="btn" id="buttonblue"type="button" name="blue">blue</button>
-    <button class="btn" id="buttongreen"type="button" name="green">green</button>
-    <button class="btn" id="buttonyellow"type="button" name="yellow">yellow</button>
-    <button class="btn" id="buttonred"type="button" name="red">red</button><br>
-
-    <button class="btn5" id=""type="button" name="2">thin</button>
-    <button class="btn5" id=""type="button" name="5">normal</button>
-    <button class="btn5" id=""type="button" name="10">thick</button>
-    <button class="btn5" id=""type="button" name="25">REDiculous</button>
-    <input class="submit1" type="number" name="thickness" value="" placeholder="Line Thickness">
+    <div class="header">
+      <button class="newbie" type="button" name="newbie" style="display:none">Import drawing history?</button>
+    </div>
+    <div class="thecanvas">
+      <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+    <div class="colors">
+      <button class="btn" id="buttonblue" type="button" name="blue">blue</button>
+      <button class="btn" id="buttongreen" type="button" name="green">green</button>
+      <button class="btn" id="buttonyellow" type="button" name="yellow">yellow</button>
+      <button class="btn" id="buttonred" type="button" name="red">red</button>
+    </div><br>
+    <div class="pens">
+      <button class="btn5" id="" type="button" name="2">thin</button>
+      <button class="btn5" id="" type="button" name="5">normal</button>
+      <button class="btn5" id="" type="button" name="10">thick</button>
+      <button class="btn5" id="" type="button" name="25">REDiculous</button>
+      <input class="submit1" type="number" name="thickness" value="" placeholder="Line Thickness">
+    </div>
     <br>
-    <button class="eraser" type="button" name="doesn'tmatterit'scoolbro">Eraser</button>
+    <div class="theeraser">
+      <button class="eraser" type="button" name="doesn'tmatterit'scoolbro">Eraser</button>
+    </div>
 
 
 
-    <script src='/socket.io/socket.io.js'></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="frontend.js"></script>
   </body>
 </html>

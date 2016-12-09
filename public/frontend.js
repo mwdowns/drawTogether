@@ -6,10 +6,9 @@ var mousebool = false;
 var lastMousePosition = [];
 var color = 'black';
 var pen = 5;
+var newbie = true;
 
 drawLine = function(x,y, color, pen) {
-  console.log('this is the color, ', color);
-  console.log(x, y);
   ctx.strokeStyle = color;
   ctx.lineJoin = 'round';
   ctx.lineWidth = pen;
@@ -20,9 +19,35 @@ drawLine = function(x,y, color, pen) {
   ctx.stroke();
 };
 
+socket.on('connect', function(canvasState) {
+  console.log('hi');
+  socket.on('canvas state', function(canvasState) {
+    console.log(canvasState);
+    if (canvasState.length > 0) {
+      console.log('do you want previous drawings?');
+      $('.newbie').show();
+      $('.newbie').on('click', function() {
+        for (var i = 0; i < canvasState.length; i++) {
+          drawLine(canvasState[i][0], canvasState[i][1], canvasState[i][2], canvasState[i][3]);
+        }
+      });
+
+    }
+    // for (var i = 0; i < canvasState.length; i++) {
+    //   drawLine(canvasState[i][0], canvasState[i][1], canvasState[i][2], canvasState[i][3]);
+    // }
+  });
+  // msg = 'hi';
+  // socket.emit('i connected', msg);
+});
+
+// socket.on('canvas state', function(canvasState) {
+//   console.log(canvasState);
+// });
+
 $('#canvas').on('mousemove', function(poopevent) {
-  mousePosition = {x: poopevent.pageX, y: poopevent.pageY};
-  if (lastMousePosition && mousebool) {
+  mousePosition = {x: poopevent.offsetX, y: poopevent.offsetY};
+  if (mousebool) {
     drawLine(lastMousePosition, mousePosition, color, pen);
     socket.emit('draw', [lastMousePosition, mousePosition, color, pen]);
   }
@@ -39,7 +64,7 @@ $('#canvas').on('mouseup', function(poopevent) {
 });
 
 $('.btn').on('click', function(click) {
-  color = click.target.name
+  color = click.target.name;
 });
 
 $('.btn5').on('click', function(click) {
